@@ -1,12 +1,14 @@
 #include "Liga.cpp"
 #include <fstream>
 #include <stdlib.h>
-
+#include <time.h> 
 
 using namespace std;
 
 int buscarLiga(vector<Liga*>, string);
 bool hayEquipos(vector<Liga*>);
+
+
 int main()
 {
 	vector<Liga*> ligas;
@@ -242,6 +244,14 @@ int main()
 		}
 		if(opcion==5)
 		{
+			fstream Leer;
+			string linea;
+			Leer.open("./ligas.txt");
+			Liga *nuevo;
+			Equipo *nuev;
+			Jugador *nue;
+			ligas.erase(ligas.begin(),ligas.end());
+			getline(Leer,linea);
 			
 		}
 		if(opcion==6)
@@ -277,7 +287,32 @@ int main()
 		}
 		if(opcion==7)
 		{
-			
+			cout<<"\n\n";
+			int n;
+			for(int x=0;x<ligas.size();x++)
+			{
+				cout<<x+1<<": ";
+				ligas.at(x)->imprimir();
+				cout<<endl;
+			}
+			cout<<"\n\nSeleccionar numero de liga: ";
+			cin>>n;
+			n--;
+			cout<<"Equipo\tPJ  PG  PE  PP  GF  GC  DG  Pts\n\n";
+			for(int x=0;x<ligas.at(n)->getEquipos().size();x++)
+			{
+				int absoluto=abs(ligas.at(n)->getEquipos().at(x)->getGF()-ligas.at(n)->getEquipos().at(x)->getGC());
+				
+				cout<<ligas.at(n)->getEquipos().at(x)->getNombre()<<"\t"<<ligas.at(n)->getEquipos().at(x)->getPJ()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPG()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPE()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPP()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getGF()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getGC()<<"   "
+																		<<absoluto<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPG()*3+ligas.at(n)->getEquipos().at(x)->getPE()
+																		<<endl;
+			}
 		}
 		cout<<"\n\n";
 	}
