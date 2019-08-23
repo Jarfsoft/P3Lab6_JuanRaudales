@@ -1,13 +1,17 @@
 #include "Liga.cpp"
 #include <fstream>
 #include <stdlib.h>
-#include <time.h> 
 
 using namespace std;
 
 int buscarLiga(vector<Liga*>, string);
 bool hayEquipos(vector<Liga*>);
-
+string separar(string, string, string );
+string ultimoDesde(string, string);
+string primeroHasta(string, string);
+bool findSimbol(string, string);
+string token(string, string, int);
+int contarCaracter(string, string);
 
 int main()
 {
@@ -252,7 +256,48 @@ int main()
 			Jugador *nue;
 			ligas.erase(ligas.begin(),ligas.end());
 			getline(Leer,linea);
+			while(!Leer.eof())
+			{
+				
+				if(linea.size()>0)
+				{
+					
+					nuevo= new Liga(separar(linea,"$",":"),ultimoDesde(linea,":"));
+					getline(Leer,linea);
+					while(!findSimbol(linea,"$"))
+					{
+						nuev= new Equipo(primeroHasta(linea,":"),separar(linea,":","{"));
+						string temp=separar(linea,"{","}");
+						if(findSimbol(temp,";"))
+						{
+							int cant=contarCaracter(temp,"|");
+							cant/=2;
+							
+							for(int x=0;x<cant;x++)
+							{
+								string temp2=token(temp,";",x+1);
+								nue= new Jugador(token(temp2,"|",1),token(temp2,"|",2),token(temp2,"|",3));
+								nuev->asignarJugador(nue);
+							}
+						}
+							
+						else
+							{
+								nue= new Jugador(token(temp,"|",1),token(temp,"|",2),token(temp,"|",3));
+								nuev->asignarJugador(nue);
+							}
+						nuevo->asignarEquipo(nuev);
+						getline(Leer,linea);
+						if(Leer.eof())
+							break;
+					}
+					ligas.push_back(nuevo);
+				}
+				Leer.close();
+			}
+			cout<<"\n\nArchivos cargados.";
 			
+			opcion=0;
 		}
 		if(opcion==6)
 		{
@@ -287,32 +332,7 @@ int main()
 		}
 		if(opcion==7)
 		{
-			cout<<"\n\n";
-			int n;
-			for(int x=0;x<ligas.size();x++)
-			{
-				cout<<x+1<<": ";
-				ligas.at(x)->imprimir();
-				cout<<endl;
-			}
-			cout<<"\n\nSeleccionar numero de liga: ";
-			cin>>n;
-			n--;
-			cout<<"Equipo\tPJ  PG  PE  PP  GF  GC  DG  Pts\n\n";
-			for(int x=0;x<ligas.at(n)->getEquipos().size();x++)
-			{
-				int absoluto=abs(ligas.at(n)->getEquipos().at(x)->getGF()-ligas.at(n)->getEquipos().at(x)->getGC());
-				
-				cout<<ligas.at(n)->getEquipos().at(x)->getNombre()<<"\t"<<ligas.at(n)->getEquipos().at(x)->getPJ()<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getPG()<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getPE()<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getPP()<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getGF()<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getGC()<<"   "
-																		<<absoluto<<"   "
-																		<<ligas.at(n)->getEquipos().at(x)->getPG()*3+ligas.at(n)->getEquipos().at(x)->getPE()
-																		<<endl;
-			}
+			
 		}
 		cout<<"\n\n";
 	}
@@ -347,4 +367,90 @@ bool hayEquipos(vector<Liga*> lista)
 	return false;
 }
 
+string separar(string cadena, string simbolo1, string simbolo2)
+{
+	char devuelta[cadena.size()];
+	if(cadena.size()>0)
+		for(int x=0;x<cadena.size();x++)
+			if(cadena[x]==simbolo1[0])
+				for(int y=x;y<cadena.size();y++)
+				{
+					if(cadena[y]==simbolo2[0])
+					{
+						devuelta[y-x-1]=NULL;
+						return devuelta;
+					}
+					if(y>x)
+						devuelta[y-x-1]=cadena[y];
+				}
+	return "";
+}
 
+string ultimoDesde(string cadena, string simbolo)
+{
+	char devuelta[cadena.size()];
+	if(cadena.size()>0)
+		for(int x=0;x<cadena.size();x++)
+			if(cadena[x]==simbolo[0])
+				for(int y=x;y<cadena.size();y++)
+				{
+					if(y>x)
+						devuelta[y-x-1]=cadena[y];
+						
+				}
+	return devuelta;
+}
+
+bool findSimbol(string cadena, string simbolo)
+{
+	for(int x=0;x<cadena.size();x++)
+	{
+		if(cadena[x]==simbolo[0])
+			return true;
+	}
+	return false;
+}
+string primeroHasta(string cadena, string simbolo)
+{
+	char devuelta[cadena.size()];
+	if(cadena.size()>0)
+		for(int x=0;x<cadena.size();x++)
+			if(cadena[x]!=simbolo[0])
+				devuelta[x]=cadena[x];
+			else
+				return devuelta;
+}
+string token(string cadena, string divisor, int pos){
+       if(cadena.size()>0){
+         char oracion[cadena.size()]; 
+         for (int i=0;i<=cadena.size();i++)
+         {
+               oracion[i]=cadena[i];
+         }                    
+         char *ptrtoken; 
+         int num=1;
+         const char* d=divisor.c_str();
+         ptrtoken = strtok(oracion , d);             
+         while(ptrtoken){
+             if(num==pos){ 
+                return ptrtoken;                    
+             }                 
+             ptrtoken = strtok(NULL, d);
+             num++;
+         }
+         return "";
+       }else{
+             return "";
+       }
+}
+
+int contarCaracter(string cadena, string simbolo)
+{
+	int n=0;
+	for(int x=0;x<cadena.size();x++)
+		if(cadena[x]==simbolo[0])
+			n++;
+			
+			
+	return n;
+}
