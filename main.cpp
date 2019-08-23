@@ -444,7 +444,13 @@ int main()
 				int absoluto=abs(ligas.at(n)->getEquipos().at(x)->getGF()-ligas.at(n)->getEquipos().at(x)->getGC());
 				
 				cout<<ligas.at(n)->getEquipos().at(x)->getNombre()<<"\t"<<ligas.at(n)->getEquipos().at(x)->getPJ()<<"   "
-																		
+																		<<ligas.at(n)->getEquipos().at(x)->getPG()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPE()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPP()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getGF()<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getGC()<<"   "
+																		<<absoluto<<"   "
+																		<<ligas.at(n)->getEquipos().at(x)->getPG()*3+ligas.at(n)->getEquipos().at(x)->getPE()
 																		<<endl;
 			}
 		}
