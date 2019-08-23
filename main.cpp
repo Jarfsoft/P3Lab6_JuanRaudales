@@ -268,7 +268,52 @@ int main()
 				cout<<"\n\nHa seleccionado el mismo equipo dos veces.";
 				continue;
 			}
+			ligas.at(n)->getEquipos().at(n2)->setPJ(1);
+			ligas.at(n)->getEquipos().at(n3)->setPJ(1);
+			while(true)
+			{
+				
+				cout<<"\n\nDesea digitar los resultados?\n\n1. Si\n2. No\n\nSeleccion: ";
+				cin>>opcion;
+				int selec;
+				int selec2;
+				if(opcion==1)
+				{
+					cout<<"\n\nGoles que metio "<<ligas.at(n)->getEquipos().at(n2)->getNombre()<<": ";
+					cin>>selec;
+					ligas.at(n)->getEquipos().at(n2)->setGF(selec);
+					ligas.at(n)->getEquipos().at(n3)->setGC(selec);
+					cout<<"\n\nGoles que metio "<<ligas.at(n)->getEquipos().at(n3)->getNombre()<<": ";
+					cin>>selec2;
+					ligas.at(n)->getEquipos().at(n3)->setGF(selec2);
+					ligas.at(n)->getEquipos().at(n2)->setGC(selec2);
+					
+					if(selec>selec2)
+					{
+						ligas.at(n)->getEquipos().at(n2)->setPG(1);
+						ligas.at(n)->getEquipos().at(n3)->setPP(1);
+					}
+					else if(selec2>selec)
+					{
+						ligas.at(n)->getEquipos().at(n3)->setPG(1);
+						ligas.at(n)->getEquipos().at(n2)->setPP(1);
+					}
+					else
+					{
+						ligas.at(n)->getEquipos().at(n3)->setPE(1);
+						ligas.at(n)->getEquipos().at(n2)->setPE(1);
+					}
+					break;
+				}
+				if(opcion==2)
+				{
+					
+				}
+			}
 			
+			cout<<"\n\nResultados guardados";
+			
+			opcion=0;
 		}
 		if(opcion==5)
 		{

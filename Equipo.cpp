@@ -68,6 +68,55 @@ class Equipo
 			jugadores.erase(jugadores.begin()+pos);
 		}
 		
+		void setGF(int n)
+		{
+			gf+=n;
+		}
+		void setGC(int n)
+		{
+			gc+=n;
+		}
+		void setPG(int n)
+		{
+			pg+=n;
+		}
+		void setPP(int n)
+		{
+			pp+=n;
+		}
+		void setPE(int n)
+		{
+			pe+=n;
+		}
+		void setPJ(int n)
+		{
+			pj+=n;
+		}
+		
+		int getGF()
+		{
+			return gf;
+		}
+		int getGC()
+		{
+			return gc;
+		}
+		int getPG()
+		{
+			return pg;
+		}
+		int getPP()
+		{
+			return pp;
+		}
+		int getPE()
+		{
+			return pe;
+		}
+		int getPJ()
+		{
+			return pj;
+		}
 		~Equipo(){}
 		
 };
