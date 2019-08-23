@@ -244,6 +244,30 @@ int main()
 		}
 		if(opcion==4)
 		{
+			cout<<"\n\n";
+			int n, n2, n3;
+			for(int x=0;x<ligas.size();x++)
+			{
+				cout<<x+1<<": ";
+				ligas.at(x)->imprimir();
+				cout<<endl;
+			}
+				
+			
+			cout<<"\n\nElegir una liga: ";
+			cin>>n;
+			n--;
+			cout<<"\n\nEquipo 1: ";
+			cin>>n2;
+			n2--;
+			cout<<"Equipo 2: ";
+			cin>>n3;
+			n3--;
+			if(n2==n3)
+			{
+				cout<<"\n\nHa seleccionado el mismo equipo dos veces.";
+				continue;
+			}
 			
 		}
 		if(opcion==5)
