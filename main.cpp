@@ -1,6 +1,7 @@
 #include "Liga.cpp"
 #include <fstream>
 #include <stdlib.h>
+#include <time.h> 
 
 using namespace std;
 
@@ -307,7 +308,32 @@ int main()
 				}
 				if(opcion==2)
 				{
+					selec = rand() % 11;
+					selec2 = rand() % 11;
+					ligas.at(n)->getEquipos().at(n2)->setGF(selec);
+					ligas.at(n)->getEquipos().at(n3)->setGC(selec);
 					
+					ligas.at(n)->getEquipos().at(n3)->setGF(selec2);
+					ligas.at(n)->getEquipos().at(n2)->setGC(selec2);
+					
+					if(selec>selec2)
+					{
+						ligas.at(n)->getEquipos().at(n2)->setPG(1);
+						ligas.at(n)->getEquipos().at(n3)->setPP(1);
+					}
+					else if(selec2>selec)
+					{
+						ligas.at(n)->getEquipos().at(n3)->setPG(1);
+						ligas.at(n)->getEquipos().at(n2)->setPP(1);
+					}
+					else
+					{
+						ligas.at(n)->getEquipos().at(n3)->setPE(1);
+						ligas.at(n)->getEquipos().at(n2)->setPE(1);
+					}
+					cout<<"\n\nGoles que metio "<<ligas.at(n)->getEquipos().at(n2)->getNombre()<<": "<<selec;
+					cout<<"\n\nGoles que metio "<<ligas.at(n)->getEquipos().at(n3)->getNombre()<<": "<<selec2;
+					break;
 				}
 			}
 			
@@ -401,6 +427,18 @@ int main()
 		}
 		if(opcion==7)
 		{
+			cout<<"\n\n";
+			int n;
+			for(int x=0;x<ligas.size();x++)
+			{
+				cout<<x+1<<": ";
+				ligas.at(x)->imprimir();
+				cout<<endl;
+			}
+			cout<<"\n\nSeleccionar numero de liga: ";
+			cin>>n;
+			n--;
+			cout<<"Equipo\tPJ  PG  PE  PP  GF  GC  DG  Pts\n\n";
 			
 		}
 		cout<<"\n\n";
