@@ -7,7 +7,12 @@ using namespace std;
 
 int buscarLiga(vector<Liga*>, string);
 bool hayEquipos(vector<Liga*>);
-
+string separar(string, string, string );
+string ultimoDesde(string, string);
+string primeroHasta(string, string);
+bool findSimbol(string, string);
+string token(string, string, int);
+int contarCaracter(string, string);
 
 int main()
 {
@@ -245,17 +250,29 @@ int main()
 		if(opcion==5)
 		{
 			
-			
-			opcion=0;
 		}
 		if(opcion==6)
 		{
-			
+			ofstream Escribir;
+			Escribir.open("./ligas.txt");
+			for(int x=0;x<ligas.size();x++)
+			{
+				Escribir<<"$"<<ligas.at(x)->getNombre()<<":"<<ligas.at(x)->getPais()<<endl;
+				for(int y=0;y<ligas.at(x)->getEquipos().size();y++)
+				{
+					
+					
+				}
+				
+			}
+			opcion=0;
 			
 		}
 		if(opcion==7)
 		{
 			
+		}
+		cout<<"\n\n";
 	}
 	
 	
@@ -287,4 +304,5 @@ bool hayEquipos(vector<Liga*> lista)
 	}
 	return false;
 }
+
 
