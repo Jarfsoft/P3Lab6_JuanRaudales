@@ -439,7 +439,14 @@ int main()
 			cin>>n;
 			n--;
 			cout<<"Equipo\tPJ  PG  PE  PP  GF  GC  DG  Pts\n\n";
-			
+			for(int x=0;x<ligas.at(n)->getEquipos().size();x++)
+			{
+				int absoluto=abs(ligas.at(n)->getEquipos().at(x)->getGF()-ligas.at(n)->getEquipos().at(x)->getGC());
+				
+				cout<<ligas.at(n)->getEquipos().at(x)->getNombre()<<"\t"<<ligas.at(n)->getEquipos().at(x)->getPJ()<<"   "
+																		
+																		<<endl;
+			}
 		}
 		cout<<"\n\n";
 	}
