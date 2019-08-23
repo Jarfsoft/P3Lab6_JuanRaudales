@@ -68,7 +68,7 @@ class Equipo
 			jugadores.erase(jugadores.begin()+pos);
 		}
 		
-	
+		
 		~Equipo(){}
 		
 };

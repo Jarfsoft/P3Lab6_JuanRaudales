@@ -7,13 +7,6 @@ using namespace std;
 
 int buscarLiga(vector<Liga*>, string);
 bool hayEquipos(vector<Liga*>);
-string separar(string, string, string );
-string ultimoDesde(string, string);
-string primeroHasta(string, string);
-bool findSimbol(string, string);
-string token(string, string, int);
-int contarCaracter(string, string);
-
 int main()
 {
 	vector<Liga*> ligas;
@@ -261,10 +254,24 @@ int main()
 				for(int y=0;y<ligas.at(x)->getEquipos().size();y++)
 				{
 					
-					
+					Escribir<<ligas.at(x)->getEquipos().at(y)->getNombre()<<":"<<ligas.at(x)->getEquipos().at(y)->getAnio()<<"{";
+					for(int z=0;z<ligas.at(x)->getEquipos().at(y)->getJugadores().size();z++)
+					{
+						Escribir<<ligas.at(x)->getEquipos().at(y)->getJugadores().at(z)->getNombre()<<"|"<<ligas.at(x)->getEquipos().at(y)->getJugadores().at(z)->getDorsal()<<"|"<<ligas.at(x)->getEquipos().at(y)->getJugadores().at(z)->getPais();
+						int temp=ligas.at(x)->getEquipos().at(y)->getJugadores().size();
+						temp--;
+						if(z==temp)
+							Escribir<<"}";
+						else
+							Escribir<<";";
+					}
+					Escribir<<endl;
 				}
 				
 			}
+			cout<<"\n\nGuardado exitoso.";
+			Escribir.close();
+			
 			opcion=0;
 			
 		}
